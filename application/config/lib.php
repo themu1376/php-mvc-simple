@@ -23,11 +23,17 @@
 	// autoload
 	function __autoload($className) {
 		$className = strtolower($className);
-		$className2 = preg_replace('/(.*)(model|application)/', '$2', $className);
+		$className2 = preg_replace('/(.*)(model|application|vo)/', '$2', $className);
 		switch ($className2) {
 			case 'application': $dir = _APP; break;
 			case 'model': $dir = _MODEL; break;
+			case 'vo': $dir = _VO; break;
 			default: $dir = _CONTROLLER; break;
 		}
 		require_once("{$dir}{$className}.php");
+	}
+
+	// Value or NULL
+	function issetOrNull($array, $key, $default = NULL) {
+		return array_key_exists($key, $array) ? $array[$key] : $default;
 	}

@@ -9,6 +9,7 @@
     define('_APP',_ROOT."application/");
     define('_PUBLIC',_ROOT."public/");
     define('_MODEL',_APP."model/");
+    define('_VO',_APP."vo/");
     define('_CONFIG',_APP."config/");
     define('_CONTROLLER',_APP."controller/");
     define('_VIEW',_APP."view/");

@@ -6,11 +6,6 @@
 		var $title;
 		var $setAjax;
 
-		// Value or NULL
-		function issetOrNull($var, $default = NULL) {
-			return isset($var) && $var != '' ? $var : $default;
-		}
-
 		// Construct
 		function __construct($param) {
 			header('content-type: text/html; charset=utf8');

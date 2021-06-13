@@ -14,7 +14,7 @@
 			$this->param = $param;
 			$this->db = new PDO("mysql:host=localhost; dbname=DBNAME; charset=utf8mb4", "ID", "PASSWORD");
 			$this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-			if(isset($_POST['action'])) {
+			if(issetOrNull($_POST, 'action')) {
 				$this->action = $_POST['action'];
 				$this->action();
 			}
