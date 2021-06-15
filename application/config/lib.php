@@ -1,39 +1,49 @@
 <?php
-	// alert
-	function alert($str) {
-		print("<script>alert('{$str}');</script>");
-	}
 
-	// move
-	function move($str = false) {
-		print("<script>");
-		print($str?"document.location.replace('{$str}');":"history.back();");
-		print("</script>");
-		exit();
-	}
-
-	// access
-	function access($bool, $msg, $url = false) {
-		if (!$bool) {
-			alert($msg);
-			move($url);
-		}
-	}
-
-	// autoload
 	function __autoload($className) {
-		$className = strtolower($className);
-		$className2 = preg_replace('/(.*)(model|application|vo)/', '$2', $className);
-		switch ($className2) {
+		$lowerClassName = strtolower($className);
+		$baseClassName = preg_replace('/(.*)(model|application|vo)/', '$2', $lowerClassName);
+		switch ($baseClassName) {
 			case 'application': $dir = _APP; break;
 			case 'model': $dir = _MODEL; break;
 			case 'vo': $dir = _VO; break;
 			default: $dir = _CONTROLLER; break;
 		}
-		require_once("{$dir}{$className}.php");
+		require_once("{$dir}{$lowerClassName}.php");
 	}
 
-	// Value or NULL
 	function issetOrNull($array, $key, $default = NULL) {
-		return array_key_exists($key, $array) ? $array[$key] : $default;
+		return array_key_exists($key, $array) ? (is_array($array) ? $array[$key] : $array->$key) : $default;
+	}
+
+	function isTrait( $object, $traitName, $autoloader = true )
+	{
+		$ret = class_uses( $object, $autoloader ) ;
+		if( is_array( $ret ) )
+		{
+			$ret = array_search( $traitName, $ret ) !== false ;
+		}
+		return $ret ;
+	}
+
+	function printObject($object) {
+		printArray((array) $object);
+	}
+
+	function printArray($array) {
+		header("content-type: text/html; charset=utf8");
+		print('<pre>');
+		print_r($array);
+		print('</pre>');
+		exit();
+	}
+		
+	function generateToken($length=6) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
 	}

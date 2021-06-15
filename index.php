@@ -16,7 +16,7 @@
     $url = str_replace("index.php","","{$_SERVER['PHP_SELF']}");
     define('_URL',$url);
     define('_IMG',_URL.'public/img/');
-    define('_CSS',_URL.'public/common/css/');
-    define('_JS',_URL.'public/common/js/');
+    define('_CSS',_URL.'public/css/');
+    define('_JS',_URL.'public/js/');
     require_once(_CONFIG."lib.php");
     new Application();
