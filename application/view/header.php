@@ -1,3 +1,4 @@
+<?php include_once(_VIEW.'tag.php'); ?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

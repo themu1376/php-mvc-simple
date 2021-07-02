@@ -1,1 +1,1 @@
-<p>hello, world!</p>
+<?php $this->view->out($this->dummy); ?>
